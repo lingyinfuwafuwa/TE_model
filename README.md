@@ -17,7 +17,7 @@ Goal: build a model that can predict termination efficiency (TE) from sequence. 
 Need to train on logit(TE). Previous studies show that this can improve performance of the model, also it can match TE to the scale of energy, as  
 
 $$
-\operatorname{logit}(\mathrm{TE}) = -\frac{\Delta\Delta G^{\ddagger}}{RT},
+\mathrm{logit}(\mathrm{TE}) = -\frac{\Delta\Delta G^{\ddagger}}{RT},
 \qquad
 \Delta\Delta G^{\ddagger} = \Delta G^{\ddagger}_{\mathrm{term}} - \Delta G^{\ddagger}_{\mathrm{read}}
 $$
