@@ -1,0 +1,10 @@
+feature,Bacillus subtilis (a),Bacillus subtilis (b),Bacillus subtilis (d),Escherichia coli (a)
+terminator_len,-0.139,-0.116,-0.122,-0.309
+terminator_len_seq,0.032,0.135,0.133,-0.034
+hairpin_len,-0.139,-0.116,-0.122,-0.309
+stem_nt,-0.092,-0.063,-0.077,-0.215
+loop_nt,-0.079,-0.092,-0.049,-0.172
+u_run,0.397,0.353,0.4,0.491
+a_run,0.125,0.272,0.246,0.296
+mfe,0.056,-0.062,-0.039,0.266
+hairpin_gc,-0.003,0.035,0.028,0.041

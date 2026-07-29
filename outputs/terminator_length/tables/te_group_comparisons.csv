@@ -1,0 +1,4 @@
+group_a,n_a,median_a,group_b,n_b,median_b,median_diff,MWU_p,cliffs_delta,effect
+TE measured,3705,54.0,no TE,8064,60.0,-6.0,0.0,-0.438,medium
+Bacillus subtilis / TE,3014,54.0,Bacillus subtilis / no TE,984,54.0,0.0,0.7235999171311316,0.007,negligible
+Escherichia coli / TE,691,54.0,Escherichia coli / no TE,957,55.0,-1.0,0.005424778723023709,-0.08,negligible
