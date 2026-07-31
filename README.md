@@ -130,11 +130,12 @@ Because intrinsic termination is very context-dependent, the model needs to be t
 | Source | Type of assay | organism | number of intrinsic terminators with TE | ID | Note |
 |---|---|---|---|---|---|
 | Chen et al 2013 | in vivo dual fluorescence reporters | E. coli | 582 (natural + synthetic) | `D02` | |
-| Froom et al 2026 | in vitro Cell free genomic/RNAP-seq | M. tuberculosis | 86–295 in vitro from the author's way of identification | `D01` | the data isn't on GEO, I've contacted the author; might be able to expand the number of terminators in the dataset if do site-specific terminator (i.e. transcripts can have multiple adjacent termination sites each correspond to a different terminator) and/or re-evaluate the pipeline of peak-calling |
+| Froom et al 2026 | in vitro Cell free genomic/RNAP-seq | M. tuberculosis | 86–295 in vitro from the author's way of identification | `D01` | 2026-07-31 Obtained data from author via a link in SRA; Can compare this one with Chen to see which one is better. All in all depicts different information from Chen. might be able to expand the number of terminators in the dataset if do site-specific terminator (i.e. transcripts can have multiple adjacent termination sites each correspond to a different terminator) and/or re-evaluate the pipeline of peak-calling |
 | TERMITe atlas (Kosinski 2025) | in vivo 3' end Term-seq | various species, ~13 datasets | Each species might have 500-1000 terminators | `D07` | Some data were produced from lab that do high quality research (e.g. Mandell et al 2022). Further diving into specific literature to check the quality and assay design need to be done |
 
 Suggest to use Chen et al 2013 (D02) as it uses dual fluorescence reporter assay from a library of intrinsic terminators, which means that we don't need to worry that much about whether the TE measured at 3' end corresponds to the terminator ends at this position, or the position is a product after exonuclease cleavage. 
 
+2026-07-31: Froom 2026 can also be used now.
 
 The `datasets_v2.csv` contains the above datasets and more (verify TBD)
 
