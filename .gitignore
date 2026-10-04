@@ -1,10 +1,18 @@
 # data (do not commit large files; use accessions)
-data/
 *.fastq
 *.fastq.gz
 *.bam
 *.bigwig
 *.bw
+
+# model weights / checkpoints (GB-scale, re-downloadable - see ENVIRONMENT.local.md)
+RNA-FM_stuff/
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.npy
+*.npz
 
 # python
 __pycache__/
@@ -13,9 +21,14 @@ __pycache__/
 venv/
 .ipynb_checkpoints/
 
+# machine-specific notes (local paths, personal setup) - keep out of the public repo
+*.local.md
+
 # os
 .DS_Store
 Thumbs.db
+# Windows Explorer duplicates, e.g. "x - Copy.xlsx" made to dodge Excel's file lock
+* - Copy.*
 
 # claude code
 # commit these (shared project config): CLAUDE.md, .claude/settings.json,

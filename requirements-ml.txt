@@ -1,0 +1,43 @@
+# TE_model -- modeling environment (sequence model + CTMC tracks)
+#
+# Superset of requirements.txt. Install only when starting the modeling work --
+# torch alone is ~2.5 GB, which is why it is not in the base file.
+#
+#   python -m pip install -r requirements-ml.txt
+#
+# STATUS as of 2026-10-01: torch, rna-fm, scikit-learn, xgboost and tqdm are installed
+# at these pins and exercised by probing/ and handcrafted_features/. shap and
+# biopython are pinned but NOT installed, and no code imports them yet; their pins
+# resolve cleanly against the rest (pip --dry-run) but are untested in code.
+
+-r requirements.txt
+
+# --- deep learning ---
+# CPU build by default. For CUDA, install torch first from the PyTorch index,
+# e.g.  pip install torch --index-url https://download.pytorch.org/whl/cu126
+torch==2.13.0
+
+# --- RNA foundation model ---
+# On PyPI; pulls numpy/pandas/tqdm/scikit-learn/ptflops. Code only -- the 1.19 GB
+# weights are downloaded separately, see RNA-FM_stuff/SOURCE.md (gitignored).
+# NOTE: rna-fm 0.2.2 calls torch.load() without weights_only=False, which fails on
+# torch >=2.6. Work around with torch.serialization.add_safe_globals([argparse.Namespace]);
+# details in RNA-FM_stuff/SOURCE.md.
+rna-fm==0.2.2
+
+# --- classical baselines + interpretability ---
+# XGBoost/SHAP baselines on Chen 2013, per the 2026-06-30 group-meeting slides.
+# xgboost 3.2.0 is what probing/nb04_baselines.ipynb and
+# handcrafted_features/train_xgboost.ipynb ran on; the Kundlatsch 2026 preprint
+# used 1.7.6. shap not installed yet; version unvalidated here.
+scikit-learn==1.9.0
+xgboost==3.2.0
+shap==0.51.0
+
+# --- sequence I/O ---
+# FASTA parsing for pre-training corpora and Rfam family sets.
+# Not installed yet; version unvalidated here.
+biopython>=1.85
+
+# --- misc ---
+tqdm==4.70.0

@@ -1,0 +1,9 @@
+[KFold]  target ln(Ts)
+  RNA-FM L12 mean vs one-hot : +0.691 vs +0.586  (difference +0.105 = 1.9x the fold-to-fold sd of 0.056)
+  best layer                 : L12 at R2 +0.691
+  <cls> vs mean pooling      : +0.674 vs +0.691 -> mean pooling better
+
+[GroupKFold]  target ln(Ts)
+  RNA-FM L12 mean vs one-hot : +0.595 vs +0.467  (difference +0.128 = 0.9x the fold-to-fold sd of 0.147)
+  best layer                 : L12 at R2 +0.595
+  <cls> vs mean pooling      : +0.560 vs +0.595 -> mean pooling better

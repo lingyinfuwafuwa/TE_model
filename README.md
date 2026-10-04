@@ -139,6 +139,8 @@ Suggest to use Chen et al 2013 (D02) as it uses dual fluorescence reporter assay
 
 The `datasets_v2.csv` contains the above datasets and more (verify TBD)
 
+**Implementation of this track lives in [`probing/`](probing/README.md)** — frozen RNA-FM embeddings into a linear head on `D02`. That README covers the setup, the `Average Strength` → `logit(TE)` conversion, and the open design choices.
+
 ---
 
 ## Guidance about using the CSV
@@ -166,6 +168,8 @@ Track：
 
 ```
 README.md                      this file
+requirements.txt               pinned deps for the analysis notebook
+requirements-ml.txt            pinned deps for the modeling tracks; superset of the above
 datasets_v2.csv                the inventory as of 2026-07-28
 Kosinski_2025_term-seq_sources_terminators_altas  the original data from Kosinski 2025 obtained from their supplementary
 Chen_2013_terminators/         per-terminator length table from Chen 2013 (D02); see SOURCE.md inside
@@ -173,6 +177,7 @@ terminator_length_distributions.ipynb  terminator length analysis - definitions,
                                per-species distributions, the TE split, and the 80 nt window argument
 outputs/terminator_length/     everything that notebook writes: figures/, tables/, and the tidy
                                per-terminator feature table terminator_features.csv
+probing/                       RNA-FM embedding + probing experiments; see probing/README.md
 20260630_BhaskarGroup_ppt_SiweiQian.pdf   Slides from Bhaskar group meeting 2026-06-30, with some discussion of baseline models trained on Chen's dataset.
 ```
 

@@ -1,0 +1,32 @@
+# TE_model -- analysis environment
+#
+# Everything the committed analysis code actually imports. Pins are the versions
+# the figures and tables under outputs/terminator_length/ were produced with, so
+# re-running terminator_length_distributions.ipynb reproduces them.
+#
+# Requires Python 3.13.
+#   python -m pip install -r requirements.txt
+#
+# Modeling dependencies (torch, scikit-learn, xgboost, shap, biopython) are
+# deliberately NOT here -- see requirements-ml.txt. Keeping them separate keeps
+# this install small (~150 MB instead of ~3 GB) for the data-inventory work.
+
+# --- data handling ---
+pandas==3.0.2
+numpy==2.4.4
+
+# --- statistics ---
+# kruskal, mannwhitneyu, spearmanr, gaussian_kde
+scipy==1.17.1
+
+# --- spreadsheet I/O ---
+# pandas.read_excel engine + direct load_workbook for the published supplements
+# (Chen 2013 MOESM tables, Kosinski 2025 terminator atlas)
+openpyxl==3.1.5
+
+# --- plotting ---
+matplotlib==3.10.9
+
+# --- notebooks ---
+jupyterlab==4.5.7
+ipykernel==7.2.0

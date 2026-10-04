@@ -1,0 +1,445 @@
+<title>RNA-FM Terminator Probe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    color-scheme: light;
+    --ground:    #fbfbfa;
+    --panel:     #ffffff;
+    --panel-alt: #f4f5f3;
+    --ink:       #10151c;
+    --ink-2:     #414a56;
+    --ink-3:     #737d8a;
+    --rule:      #e0e2e0;
+    --rule-firm: #c8ccc9;
+    --fm:        #2a78d6;   /* RNA-FM  */
+    --hc:        #b35a28;   /* hand-crafted */
+    --warn:      #a03535;   /* caveats only */
+    --fm-wash:   #eaf2fc;
+    --hc-wash:   #fbf0e8;
+    --warn-wash: #fbeeee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground:    #10141a;
+      --panel:     #161b23;
+      --panel-alt: #1c222b;
+      --ink:       #eef1f5;
+      --ink-2:     #b3bcc8;
+      --ink-3:     #7d8794;
+      --rule:      #262d37;
+      --rule-firm: #3a434f;
+      --fm:        #6aa8f0;
+      --hc:        #e0854d;
+      --warn:      #e07070;
+      --fm-wash:   #16233a;
+      --hc-wash:   #2c1d13;
+      --warn-wash: #2e1919;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground:    #10141a;
+    --panel:     #161b23;
+    --panel-alt: #1c222b;
+    --ink:       #eef1f5;
+    --ink-2:     #b3bcc8;
+    --ink-3:     #7d8794;
+    --rule:      #262d37;
+    --rule-firm: #3a434f;
+    --fm:        #6aa8f0;
+    --hc:        #e0854d;
+    --warn:      #e07070;
+    --fm-wash:   #16233a;
+    --hc-wash:   #2c1d13;
+    --warn-wash: #2e1919;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 56px 28px 96px; }
+  .prose { max-width: 68ch; }
+
+  h1, h2, h3, .eyebrow, th, .kpi-n, .tag {
+    font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+  }
+  h1 {
+    font-size: clamp(30px, 4.4vw, 44px);
+    line-height: 1.1; font-weight: 700; letter-spacing: -0.02em;
+    text-wrap: balance; margin: 0 0 14px;
+  }
+  h2 {
+    font-size: 21px; font-weight: 700; letter-spacing: -0.01em;
+    text-wrap: balance; margin: 0 0 4px;
+  }
+  h3 {
+    font-size: 15px; font-weight: 600; letter-spacing: 0.01em;
+    margin: 0 0 8px; color: var(--ink);
+  }
+  p { margin: 0 0 14px; }
+  a { color: var(--fm); }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .lede {
+    font-size: 19px; color: var(--ink-2); max-width: 62ch;
+    margin: 0 0 30px;
+  }
+
+  header { border-bottom: 2px solid var(--rule-firm); padding-bottom: 26px; margin-bottom: 12px; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 8px 22px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; color: var(--ink-3); margin-top: 18px;
+  }
+  .meta b { color: var(--ink-2); font-weight: 500; }
+
+  section { padding: 38px 0 4px; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: 0; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+  .sec-head .eyebrow { flex: 0 0 auto; }
+
+  /* headline finding */
+  .verdict {
+    background: var(--panel); border: 1px solid var(--rule-firm);
+    border-left: 4px solid var(--fm);
+    padding: 22px 26px; margin: 26px 0 4px; border-radius: 3px;
+  }
+  .verdict h2 { margin-bottom: 8px; }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  /* tables */
+  .scroller { overflow-x: auto; margin: 18px 0 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  caption {
+    caption-side: top; text-align: left; color: var(--ink-3);
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    padding-bottom: 9px; letter-spacing: 0.01em;
+  }
+  th {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--ink-3); text-align: right; padding: 0 14px 9px; white-space: nowrap;
+    border-bottom: 1px solid var(--rule-firm);
+  }
+  th:first-child, td:first-child { text-align: left; padding-left: 0; }
+  th:last-child, td:last-child { padding-right: 0; }
+  td {
+    padding: 9px 14px; border-bottom: 1px solid var(--rule);
+    text-align: right; white-space: nowrap;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums; font-size: 13.5px;
+  }
+  td:first-child { font-family: Archivo, sans-serif; font-size: 13.5px; color: var(--ink); }
+  tbody tr:hover { background: var(--panel-alt); }
+  tr.win td { background: var(--fm-wash); }
+  tr.win td:first-child { font-weight: 600; }
+  .dim { color: var(--ink-3); }
+  .best { font-weight: 600; color: var(--fm); }
+  .best-hc { font-weight: 600; color: var(--hc); }
+
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 2px; vertical-align: 1px;
+  }
+  .tag-fm { background: var(--fm-wash); color: var(--fm); }
+  .tag-hc { background: var(--hc-wash); color: var(--hc); }
+
+  /* the 2x2 */
+  .grid2 {
+    display: grid; grid-template-columns: minmax(150px, 1fr) 1fr 1fr;
+    border: 1px solid var(--rule-firm); border-radius: 3px; overflow: hidden;
+    margin: 20px 0 10px; background: var(--rule);
+    gap: 1px;
+  }
+  .grid2 > div { background: var(--panel); padding: 15px 18px; }
+  .grid2 .hd {
+    background: var(--panel-alt); font-family: Archivo, sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--ink-3); display: flex; align-items: center;
+  }
+  .cell-n {
+    font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+    font-size: 25px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;
+  }
+  .cell-sd { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink-3); margin-top: 3px; }
+  .bar { height: 4px; border-radius: 2px; background: var(--rule); margin-top: 10px; overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: 2px; }
+
+  /* callouts */
+  .note {
+    border: 1px solid var(--rule); border-left: 3px solid var(--warn);
+    background: var(--warn-wash);
+    padding: 15px 18px; margin: 20px 0; border-radius: 3px;
+    font-size: 15px; color: var(--ink-2);
+  }
+  .note strong { color: var(--ink); }
+  .note p:last-child { margin-bottom: 0; }
+
+  ul.tight { margin: 0 0 14px; padding-left: 20px; }
+  ul.tight li { margin-bottom: 9px; }
+
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.88em; background: var(--panel-alt);
+    padding: 1.5px 5px; border-radius: 2px; color: var(--ink-2);
+  }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--rule);
+          border: 1px solid var(--rule); margin: 22px 0 6px; border-radius: 3px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 14px 16px; }
+  .kpi-n { font-family: "IBM Plex Mono", monospace; font-size: 22px; font-weight: 500;
+           font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .kpi-l { font-size: 12px; color: var(--ink-3); line-height: 1.4; margin-top: 3px;
+           font-family: Archivo, sans-serif; }
+
+  footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--rule);
+           font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-3); }
+
+  @media (max-width: 620px) {
+    .wrap { padding: 34px 18px 70px; }
+    .grid2 { grid-template-columns: 1fr; }
+    .grid2 .hd.corner { display: none; }
+  }
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Chen 2013 · D02 · frozen-backbone probe</div>
+  <h1>Do RNA-FM embeddings beat hand-crafted features?</h1>
+  <p class="lede">A linear probe on frozen RNA-FM representations, scored against the 16 thermodynamic
+  features from Kundlatsch et&nbsp;al., on identical folds and an identical target.</p>
+  <div class="meta">
+    <span><b>n</b> 582 terminators</span>
+    <span><b>target</b> ln(T<sub>S</sub>)</span>
+    <span><b>cv</b> 10-fold, seed 42</span>
+    <span><b>backbone</b> frozen throughout</span>
+    <span><b>2026-09-04</b></span>
+  </div>
+</header>
+
+<div class="verdict">
+  <h2>The answer is no — they tie.</h2>
+  <p>Best RNA-FM pipeline scores <span class="mono">0.666</span>, best hand-crafted pipeline
+  <span class="mono">0.620</span>. The difference is <span class="mono">+0.046</span> against a
+  fold-to-fold spread of <span class="mono">±0.13</span>, winning 8 of 10 folds at
+  <span class="mono">p&nbsp;=&nbsp;0.13</span>. Not a difference this dataset can resolve.</p>
+  <p>That is still worth knowing: 640 generic dimensions from a model that has never seen a
+  terminator match 16 features designed from decades of termination biochemistry. The pretrained
+  representation <em>contains</em> the signal — it just doesn't contain more of it.</p>
+</div>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">nb04</span><h2>Representation × model class</h2></div>
+  <div class="prose">
+    <p>The comparison only means something if both representations get their best head. They don't
+    want the same one, which is the actual finding here.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="hd corner"></div>
+    <div class="hd">Ridge · linear</div>
+    <div class="hd">XGBoost · trees</div>
+
+    <div class="hd" style="text-transform:none;font-size:13px;color:var(--fm)">RNA-FM<br><span style="color:var(--ink-3);font-weight:500">L6 mean+max, 109&nbsp;nt</span></div>
+    <div>
+      <div class="cell-n" style="color:var(--fm)">0.666</div>
+      <div class="cell-sd">± 0.128 &nbsp;·&nbsp; best overall</div>
+      <div class="bar"><i style="width:100%;background:var(--fm)"></i></div>
+    </div>
+    <div>
+      <div class="cell-n">0.602</div>
+      <div class="cell-sd">± 0.095</div>
+      <div class="bar"><i style="width:90%;background:var(--fm);opacity:.5"></i></div>
+    </div>
+
+    <div class="hd" style="text-transform:none;font-size:13px;color:var(--hc)">Hand-crafted<br><span style="color:var(--ink-3);font-weight:500">16 features, preprint</span></div>
+    <div>
+      <div class="cell-n">0.429</div>
+      <div class="cell-sd">± 0.203</div>
+      <div class="bar"><i style="width:64%;background:var(--hc);opacity:.5"></i></div>
+    </div>
+    <div>
+      <div class="cell-n" style="color:var(--hc)">0.620</div>
+      <div class="cell-sd">± 0.121 &nbsp;·&nbsp; best for these features</div>
+      <div class="bar"><i style="width:93%;background:var(--hc)"></i></div>
+    </div>
+  </div>
+
+  <div class="scroller">
+    <table>
+      <caption>Paired over the same 10 GroupKFold folds. Wilcoxon signed-rank.</caption>
+      <thead><tr><th>Contrast</th><th>Δ R²</th><th>Folds won</th><th>p</th></tr></thead>
+      <tbody>
+        <tr class="win"><td>hand-crafted: Ridge → XGBoost</td><td class="best-hc">+0.191</td><td>10 / 10</td><td>0.002</td></tr>
+        <tr class="win"><td>RNA-FM: Ridge → XGBoost</td><td style="color:var(--warn)">−0.064</td><td>2 / 10</td><td>0.014</td></tr>
+        <tr><td>RNA-FM+Ridge − hand-crafted+XGBoost</td><td>+0.046</td><td>8 / 10</td><td class="dim">0.131</td></tr>
+        <tr><td>RNA-FM+XGBoost − hand-crafted+XGBoost</td><td>−0.018</td><td>5 / 10</td><td class="dim">0.557</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose">
+    <p>Sixteen scalars where interactions carry the signal need trees. Twelve hundred and eighty
+    embedding dimensions where the signal is already linearly accessible are <em>hurt</em> by them —
+    trees overfit 582 samples. Only the first two rows clear significance; the two head-to-head
+    contrasts do not.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">nb01 · nb02</span><h2>Arms and windows</h2></div>
+  <div class="scroller">
+    <table>
+      <caption>R², target ln(T<sub>S</sub>), ridge head. Two windows × two split schemes.</caption>
+      <thead>
+        <tr>
+          <th>Representation</th>
+          <th>90 nt · group</th><th>90 nt · random</th>
+          <th>109 nt · group</th><th>109 nt · random</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>RNA-FM L12 mean</td><td>0.595</td><td class="dim">0.691</td><td>0.589</td><td class="dim">0.683</td></tr>
+        <tr><td>RNA-FM L12 &lt;cls&gt;</td><td>0.560</td><td class="dim">0.674</td><td>0.600</td><td class="dim">0.693</td></tr>
+        <tr class="win"><td>RNA-FM L6 mean</td><td>0.573</td><td class="dim">0.668</td><td class="best">0.634</td><td class="dim">0.713</td></tr>
+        <tr><td>RNA-FM L9 mean</td><td>0.578</td><td class="dim">0.678</td><td>0.610</td><td class="dim">0.699</td></tr>
+        <tr><td>One-hot sequence</td><td>0.467</td><td class="dim">0.586</td><td>0.552</td><td class="dim">0.652</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>The 19&nbsp;nt downstream of the termination site carries real signal. One-hot gains the most
+    from it (<span class="mono">+0.085</span> grouped, 9/10 folds) — and one-hot is a purely linear
+    model on raw nucleotides, so the information is unambiguously present rather than an artifact of
+    the embedding.</p>
+    <p>Layer&nbsp;12 mean-pooled is the only arm that <em>cannot</em> use it
+    (<span class="mono">−0.006</span>, 5/10 folds). That motivated the pooling ablation.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">nb03</span><h2>Pooling — the layers want opposite things</h2></div>
+  <div class="scroller">
+    <table>
+      <caption>R², GroupKFold, ln(T<sub>S</sub>), 109 nt window. Δ is against that layer's mean-pool baseline.</caption>
+      <thead><tr><th>Pooling</th><th>Layer 6</th><th>Δ</th><th>Layer 12</th><th>Δ</th></tr></thead>
+      <tbody>
+        <tr><td>mean, all positions</td><td>0.634</td><td class="dim">—</td><td>0.589</td><td class="dim">—</td></tr>
+        <tr><td>max, all positions</td><td>0.652</td><td>+0.018</td><td>0.579</td><td>−0.011</td></tr>
+        <tr class="win"><td>mean + max concat</td><td class="best">0.666</td><td>+0.032</td><td>0.597</td><td>+0.008</td></tr>
+        <tr><td>&lt;cls&gt; token</td><td>0.625</td><td>−0.010</td><td>0.600</td><td>+0.011</td></tr>
+        <tr><td>mean, last 30 only</td><td>0.638</td><td>+0.003</td><td class="best">0.639</td><td>+0.050</td></tr>
+        <tr><td>mean, last 10 only</td><td>0.639</td><td>+0.004</td><td>0.621</td><td>+0.032</td></tr>
+        <tr><td>upstream + downstream</td><td>0.646</td><td>+0.012</td><td>0.611</td><td>+0.022</td></tr>
+        <tr><td>flatten all positions</td><td>0.613</td><td>−0.022</td><td>0.626</td><td>+0.036</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p><strong>Layer 12</strong> holds the signal near the 3′ end — narrowing to the last 30 positions
+    gains <span class="mono">+0.050</span> (10/10 folds, p&nbsp;=&nbsp;0.002). Averaging over all 109
+    really was diluting it.</p>
+    <p><strong>Layer 6</strong> does not behave that way at all. Narrowing gains nothing; it wants a
+    second statistic over the <em>same</em> positions. <span class="mono">mean+max</span> wins 10/10
+    folds at p&nbsp;=&nbsp;0.002.</p>
+    <p>Two negative results worth keeping. <span class="mono">flatten</span> — 69,760 features, free
+    positional weighting — does not win, so ridge cannot exploit that freedom at n&nbsp;=&nbsp;582 and
+    pooling is acting as useful regularization. And <span class="mono">mean downstream only</span>
+    matches the full window at layer 6: those 19 positions already encode the upstream through
+    self-attention.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">Dataset</span><h2>The split matters less than the target</h2></div>
+  <div class="prose">
+    <p>Chen's synthetic libraries are combinatorial variants on shared hairpin scaffolds, so rows are
+    not independent. Grouping by hairpin removes the leak entirely.</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-n">387</div><div class="kpi-l">distinct hairpins across 582 rows</div></div>
+    <div class="kpi"><div class="kpi-n">311</div><div class="kpi-l">singleton groups — genuinely independent</div></div>
+    <div class="kpi"><div class="kpi-n">88.6%</div><div class="kpi-l">window identity between rows sharing a hairpin <span class="dim">(31.6% at random)</span></div></div>
+    <div class="kpi"><div class="kpi-n" style="color:var(--warn)">39.0%</div><div class="kpi-l">of random-fold test groups also appear in train <span class="dim">(0.0% grouped)</span></div></div>
+  </div>
+
+  <div class="scroller">
+    <table>
+      <caption>Hand-crafted features + tuned XGBoost. Only the target differs between rows.</caption>
+      <thead><tr><th>Target</th><th>Random KFold</th><th>GroupKFold</th><th>Leakage penalty</th></tr></thead>
+      <tbody>
+        <tr><td>raw T<sub>S</sub></td><td class="dim">0.639</td><td>0.398</td><td style="color:var(--warn)">−0.241</td></tr>
+        <tr class="win"><td>ln(T<sub>S</sub>)</td><td class="dim">0.691</td><td>0.620</td><td>−0.071</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose">
+    <p>Same features, same model, same folds. On raw T<sub>S</sub> the grouping penalty is
+    <span class="mono">0.24</span>; on ln(T<sub>S</sub>) it is <span class="mono">0.07</span>.</p>
+    <p>R² on raw T<sub>S</sub> is dominated by a handful of terminators in the 200–380 range, so a
+    fold's score depends mostly on where those few landed — hence fold standard deviations up to
+    <span class="mono">±0.45</span> and one fold at <span class="mono">−0.44</span>. On a log target no
+    single terminator dominates the squared error and folds become comparable. <strong>Most of what
+    looked like leakage was target skew.</strong></p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">Caveats</span><h2>What not to over-read</h2></div>
+  <div class="note">
+    <p><strong>The pooling winner was selected post hoc.</strong> Ten poolings × two layers × two
+    schemes = 40 configurations, and <span class="mono">mean+max</span> at layer 6 was the best of
+    them. With fold sd near <span class="mono">0.13</span>, some of that <span class="mono">+0.032</span>
+    is selection. Re-run it on a fresh fold seed before it carries a claim.</p>
+  </div>
+  <div class="prose">
+    <ul class="tight">
+      <li><strong>GroupKFold is one deterministic partition.</strong> Every ± here is across folds, not
+      across repeats. <span class="mono">GroupShuffleSplit</span> over several seeds would give a real
+      error bar.</li>
+      <li><strong>Groups use exact hairpin identity.</strong> 101 pairs of <em>distinct</em> hairpins are
+      ≥90% similar, so similarity clustering would merge more rows and push the grouped numbers lower.</li>
+      <li><strong>Hand-crafted features predate the annotation fix.</strong> They were computed before the
+      pheA-1 / ECK120034435 swap, so 2 of 582 rows carry uncorrected values in that arm.</li>
+      <li><strong>Assay noise is unmeasured.</strong> Chen's sheets carry per-construct standard
+      deviations. Until that noise floor is computed, the ceiling on achievable R² is unknown — some of
+      the remaining variance may not be explainable by any model.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">Next</span><h2>Where the headroom is</h2></div>
+  <div class="prose">
+    <p>Not in better pooling of frozen embeddings. Across 40 configurations the ceiling sat at
+    0.62–0.67 regardless of layer, window or pooling, and the best linear probe ties a tuned
+    gradient-boosted model on 16 hand-designed features.</p>
+    <p>That is the expected result for a <em>frozen</em> backbone, and it was the right cheap first
+    experiment. If a foundation model is going to earn its keep here it will be through fine-tuning or
+    the domain-adaptive continued pre-training on terminator corpora already proposed in the project
+    README — not through a better read-out of representations that were never adapted to this task.</p>
+  </div>
+</section>
+
+<footer>
+  probing/probe_rnafm.ipynb · nb02_window_comparison · nb03_pooling_ablation · nb04_baselines<br>
+  folds.json seed 42 · RNA-FM rna_fm_t12, 99.5 M params, frozen · results/*.csv
+</footer>
+
+</div>
