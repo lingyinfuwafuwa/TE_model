@@ -1,4 +1,4 @@
-# MS3: data landscape for intrinsic transcription termination
+# data landscape for intrinsic transcription termination
 
 A survey of what public data exists for predicting bacterial intrinsic transcription
 termination efficiency (TE) from sequence, and what it can and cannot support.
