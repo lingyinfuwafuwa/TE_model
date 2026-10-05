@@ -61,7 +61,8 @@ def repo_root(start=None):
 
 
 def read_excel_unlocked(path, **kw):
-    """Survive the workbook being open in Excel (see CLAUDE.md)."""
+    """Survive the workbook being open in Excel: Excel's lock makes read_excel raise
+    PermissionError, so read a copy made with Win32 CopyFileW instead."""
     try:
         return pd.read_excel(path, **kw)
     except PermissionError:

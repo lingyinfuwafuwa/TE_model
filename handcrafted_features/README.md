@@ -24,8 +24,8 @@ Both notebooks use paths relative to this folder, so run them from here.
 ## Caveats
 
 * Computed from the supplement **as published**, so it does not include the pheA-1 /
-  ECK120034435 annotation-swap correction (see `CLAUDE.md`). Those 2 rows carry each other's
-  features.
+  ECK120034435 annotation-swap correction that `make_csv_chen.ipynb` applies to the training
+  tables. Those 2 rows carry each other's features.
 * `train_xgboost.ipynb` uses a shuffled `KFold`, which puts near-duplicate constructs on both
   sides of a split. `probing/nb04_baselines.ipynb` re-runs the same model on `GroupKFold`.
 * The preprint used xgboost 1.7.6; this repo pins 3.2.0.

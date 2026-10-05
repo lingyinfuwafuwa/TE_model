@@ -31,9 +31,10 @@ Thumbs.db
 * - Copy.*
 
 # claude code
-# commit these (shared project config): CLAUDE.md, .claude/settings.json,
+# commit these (shared project config): .claude/settings.json,
 # .claude/commands/, .claude/agents/, .claude/skills/
-# ignore these (machine-specific / transient):
+# ignore these (kept local / machine-specific / transient):
+CLAUDE.md
 .claude/settings.local.json
 .claude/*.local.md
 .claude/sessions/
