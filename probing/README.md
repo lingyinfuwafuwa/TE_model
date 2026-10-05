@@ -1,7 +1,8 @@
 # `probing/` — RNA-FM embeddings → termination efficiency
 
-Implementation, not inventory. The repo root `README.md` is a *survey*: what public data
-exists for intrinsic transcription termination and what it can support. This folder is the
+Implementation, not inventory. [`public_dataset_survey/`](../public_dataset_survey/README.md) is
+the *survey*: what public data exists for intrinsic transcription termination and what it can
+support. This folder is the
 first thing built **on top of** that survey — taking a frozen RNA foundation model and asking
 whether its embeddings already carry termination-relevant signal.
 
@@ -77,8 +78,8 @@ Two things bite, both already handled in `embeddings_smoke.ipynb`:
 
 2. **A wrong path silently re-downloads 1.19 GB.** `fm.pretrained.rna_fm_t12(path)` falls back
    to fetching from CUHK when `path` does not exist, with no warning. Assert first. The
-   notebook anchors to the repo root by walking up to `datasets_v2.csv`, so it works from any
-   cwd.
+   notebook anchors to the repo root by walking up to `public_dataset_survey/datasets_v2.csv`,
+   so it works from any cwd.
 
 Output is `(batch, longest_len + 2, 640)` — BOS and EOS are included, strip them before
 pooling. RNA-FM expects **RNA** alphabet, so `T` → `U` on the way in.
@@ -166,7 +167,7 @@ Nothing here is settled; these are the knobs that will decide whether the probe 
 - **How to pool.** Mean over the window, mean over the hairpin only, the U-tract tokens, or
   BOS as a sequence summary. Termination is local, so whole-sequence mean pooling may dilute
   exactly the signal being looked for.
-- **What window.** Root README argues 90 nt upstream + 19 nt downstream. Chen's `Sequence`
+- **What window.** The survey README argues 90 nt upstream + 19 nt downstream. Chen's `Sequence`
   column is the cloned insert (terminator **plus** vector scaffold, 23–168 nt), so the window
   has to be cut deliberately rather than inherited from the file.
 - **Splits.** Random splits leak: `L3S…` synthetics are combinatorial variants sharing stems.
@@ -185,6 +186,7 @@ A probe that only ties these has shown nothing.
 
 ---
 
-**Related.** Root `README.md` — dataset inventory and the argument for `D02`.
+**Related.** [`public_dataset_survey/README.md`](../public_dataset_survey/README.md) — dataset
+inventory and the argument for `D02`.
 `RNA-FM_stuff/SOURCE.md` — weights provenance and loading.
 `ENVIRONMENT.local.md` — venv and how to run things (gitignored, local only).

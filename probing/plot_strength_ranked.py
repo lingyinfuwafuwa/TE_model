@@ -55,7 +55,7 @@ T_CRIT = 4.302653     # t(df=2, 0.975) -- Chen reports n=3
 def repo_root(start=None):
     p = (start or Path.cwd()).resolve()
     for cand in (p, *p.parents):
-        if (cand / "datasets_v2.csv").exists():
+        if (cand / "public_dataset_survey/datasets_v2.csv").exists():
             return cand
     raise FileNotFoundError("repo root not found")
 

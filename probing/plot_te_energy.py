@@ -42,9 +42,9 @@ RT = R_KCAL * T_KELVIN    # ~0.6164 kcal/mol
 def repo_root(start=None):
     p = (start or Path.cwd()).resolve()
     for cand in (p, *p.parents):
-        if (cand / "datasets_v2.csv").exists():
+        if (cand / "public_dataset_survey/datasets_v2.csv").exists():
             return cand
-    raise FileNotFoundError("repo root not found (looked for datasets_v2.csv)")
+    raise FileNotFoundError("repo root not found (looked for public_dataset_survey/datasets_v2.csv)")
 
 
 def read_excel_unlocked(path, **kw):

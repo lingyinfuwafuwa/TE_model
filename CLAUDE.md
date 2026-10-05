@@ -2,10 +2,11 @@
 
 Predicting bacterial intrinsic transcription termination efficiency (TE) from sequence.
 
-The repo has two halves, and they are different kinds of work:
+The root `README.md` is the project overview and the GitHub front page. Behind it, the repo has
+two halves, and they are different kinds of work:
 
-- **Survey** — `README.md` + `datasets_v2.csv`: what public data exists and what it can support.
-  `README.md` is published to GitHub.
+- **Survey** — `public_dataset_survey/` (`README.md` + `datasets_v2.csv`): what public data
+  exists and what it can support. Scripts find the repo root by walking up to that CSV.
 - **Implementation** — `probing/`: frozen RNA-FM embeddings into a linear head on Chen 2013.
   See `probing/README.md`. The hand-crafted-feature baseline it is compared against
   (the Kundlatsch 2026 preprint's 16 features + XGBoost) lives in `handcrafted_features/`.
@@ -16,14 +17,14 @@ Analysis stack is pinned in `requirements.txt`; the modeling stack (torch, rna-f
 in `requirements-ml.txt`. **No seaborn anywhere — write plotting code against matplotlib only.**
 
 Machine-specific setup (venv path, activation, kernel name) is in `ENVIRONMENT.local.md`, which
-is gitignored. Do not put local paths in `README.md` — it goes to GitHub.
+is gitignored. Do not put local paths in any `README.md` — they go to GitHub.
 
 Gitignored on purpose: `*.local.md`, `RNA-FM_stuff/` (1.19 GB of weights; provenance and loading
 instructions in `RNA-FM_stuff/SOURCE.md`), and the usual checkpoint extensions.
 
 ## Gotchas that have already cost time
 
-- **`datasets_v2.csv` is not UTF-8.** Byte `0x96` (cp1252 en-dash) at offset 7647.
+- **`public_dataset_survey/datasets_v2.csv` is not UTF-8.** Byte `0x96` (cp1252 en-dash) at offset 7647.
   `pd.read_csv(..., encoding="cp1252")`.
 - **The Chen `.xlsx` files are often open in Excel**, which makes `pd.read_excel` raise
   `PermissionError`. `shutil.copyfile` fails the same way (it uses `open()`); Win32 `CopyFileW`
