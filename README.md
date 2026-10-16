@@ -10,7 +10,7 @@ if it tells us anything new about the mechanism of intrinsic termination.
 
 ## Writeup
 
-[`ms3_probing_writeup-v3.pdf`](ms3_probing_writeup-v3.pdf): *A frozen RNA language model matches
+[`SiweiQian_TerminatorStrength_Writeup_Oct2026.pdf`](SiweiQian_TerminatorStrength_Writeup_Oct2026.pdf): *A frozen RNA language model matches
 hand-crafted features for terminator strength prediction*. A short paper-style report
 (introduction, methods, results, discussion) on parts 2–4 below, and the quickest way to see what
 the repo found. On the 582 Chen 2013 terminators, with ln(Ts) as the target and 10-fold CV grouped
