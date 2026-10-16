@@ -8,6 +8,27 @@ Goal: build a model that predicts TE from the terminator sequence, see how it co
 current state of the art (hand-crafted features + XGBoost), and later look into the model to see
 if it tells us anything new about the mechanism of intrinsic termination.
 
+## Writeup
+
+[`ms3_probing_writeup-v3.pdf`](ms3_probing_writeup-v3.pdf): *A frozen RNA language model matches
+hand-crafted features for terminator strength prediction*. A short paper-style report
+(introduction, methods, results, discussion) on parts 2–4 below, and the quickest way to see what
+the repo found. On the 582 Chen 2013 terminators, with ln(Ts) as the target and 10-fold CV grouped
+by hairpin:
+
+- Every RNA-FM embedding arm (layers 6, 9 and 12, mean pooled or `<cls>`) beats one-hot sequence
+  with the same ridge head. Best is layer 12 mean pooling, R² 0.595 against 0.467.
+- Adding 19 nt downstream of the termination site helps layer 6 embeddings and one-hot.
+- RNA-FM layer 6 embeddings (109 nt) with ridge reach R² 0.634, level with the 16 hand-crafted
+  features of Kundlatsch et al 2026 with XGBoost (0.620). The hand-crafted features need XGBoost to
+  get there; with ridge they reach 0.429.
+
+Where the numbers come from: Tables 1–3 in `probing/probe_rnafm.ipynb`, Table 4 in
+`probing/nb02_window_comparison.ipynb`, Tables 5–6 in `probing/nb04_baselines.ipynb`. Figure 2 is
+`probing/figures/strength_ranked_linear_and_logts.png`, Figure 3 is
+`outputs/terminator_length/figures/fig08_input_window_clean.png`. The rough noise-ceiling check in
+the discussion is `probing/nb05_noise_ceiling.ipynb`.
+
 The repo started as a survey of public datasets and grew from there. Four parts, roughly in the
 order they were done:
 
